@@ -1,0 +1,66 @@
+.thumbnail img {
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+}
+
+.row text-center {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.col-md-3col-sm-6 {
+  height: 140px;
+}
+
+.thumbnail {
+  padding: 0;
+}
+
+.thumbnail caption-full {
+  padding: 9px;
+}
+
+.deleteForm {
+  display: inline;
+}
+
+.login-form-container {
+  background-image: url(http://i.imgur.com/K3mPv14.jpg);
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: table;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.loginform {
+  display: table-cell;
+  height: 100%;
+}
+
+.thumbnail-show img {
+  object-fit: cover;
+  height: 350px;
+  width: 100%;
+  margin-top: 2.5%;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.jumbotron {
+  margin-top: 2.5%;
+}
+
+.loginform a {
+  color: #181a1c;
+  display: block;
+}
+
+.form-group {
+  text-align: center;
+  display: inline-block;
+}
