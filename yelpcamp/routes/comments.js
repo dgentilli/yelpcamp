@@ -4,7 +4,7 @@ var Campground = require("../models/campground");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
-//comments new route
+/**comments new route*/
 router.get("/new", middleware.isLoggedIn, function(req, res) {
   Campground.findById(req.params.id, function(err, campground) {
     if (err) {
@@ -15,9 +15,8 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
   });
 });
 
-//comments create route
+/**comments create route*/
 router.post("/", middleware.isLoggedIn, function(req, res) {
-  //lookup cg using id
   Campground.findById(req.params.id, function(err, campground) {
     if (err) {
       console.log(err);
@@ -25,8 +24,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
     } else {
       let commentData = {
         author: req.user_id,
-        username: req.user.username //req.author.username;
-        //commentData.created = Date.now;
+        username: req.user.username
       };
 
       const newComment = new Comment(commentData);
@@ -37,11 +35,9 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
           req.flash("error", "Something Went Wrong");
           console.log(err);
         } else {
-          //add username and id to comment
           comment.author.id = req.user._id;
           comment.author.username = req.user.username;
           comment.created = Date.now;
-          //save comment
           comment.save();
           campground.comments.push(comment);
           campground.save();
@@ -54,7 +50,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
   });
 });
 
-//COMMENT EDIT ROUTE
+/**COMMENT EDIT ROUTE*/
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(
   req,
   res
@@ -77,7 +73,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(
   });
 });
 
-// COMMENT UPDATE
+/**COMMENT UPDATE*/
 router.put("/:comment_id", middleware.checkCommentOwnership, function(
   req,
   res
@@ -94,12 +90,11 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(
   });
 });
 
-//COMMENT DESTROY ROUTE
+/**COMMENT DESTROY ROUTE*/
 router.delete("/:comment_id", middleware.checkCommentOwnership, function(
   req,
   res
 ) {
-  //findByIdAndRemove
   Comment.findByIdAndRemove(req.params.comment_id, function(err) {
     if (err) {
       res.redirect("back");

@@ -10,16 +10,15 @@ if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
 }
 
-//root route
+/**root route*/
 router.get("/", function(req, res) {
   res.render("landing");
 });
 
-//SHOW REGISTER FORM
+/**SHOW REGISTER FORM*/
 router.get("/register", function(req, res) {
   res.render("register");
 });
-//handle sign up logic
 router.post("/register", function(req, res) {
   var newUser = new Camper({
     username: req.body.username,
@@ -41,11 +40,10 @@ router.post("/register", function(req, res) {
   });
 });
 
-//SHOW LOGIN FORM
+/**SHOW LOGIN FORM */
 router.get("/login", function(req, res) {
   res.render("login");
 });
-//HANDLING LOGIN LOGIC
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -55,14 +53,14 @@ router.post(
   function(req, res) {}
 );
 
-//LOGOUT ROUTE
+/**LOGOUT ROUTE*/
 router.get("/logout", function(req, res) {
   req.logout();
   req.flash("success", "Logged You Out!");
   res.redirect("/campgrounds");
 });
 
-//FORGOT PASSWORD ROUTE
+/**FORGOT PASSWORD ROUTE*/
 router.get("/forgot", function(req, res) {
   res.render("forgot");
 });

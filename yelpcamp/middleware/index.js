@@ -3,7 +3,8 @@ var isEmpty = require("is-empty");
 
 var Campground = require("../models/campground");
 var Comment = require("../models/comment");
-// ALL THE MIDDLEWARE GOES HERE
+
+/**ALL THE MIDDLEWARE GOES HERE*/
 var middlewareObj = {};
 
 middlewareObj.checkCampgroundOwnership = function(req, res, next) {
@@ -13,7 +14,6 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
         req.flash("error", "Campground Not Found");
         res.redirect("back");
       } else {
-        //does user own the campground?
         if (foundCampground.author.id.equals(req.user._id)) {
           next();
         } else {
@@ -35,7 +35,6 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
         req.flash("error", "Comment Not  Found");
         res.redirect("back");
       } else {
-        //does user own the comment?
         if (foundComment.author.id.equals(req.user._id)) {
           next();
         } else {
@@ -64,12 +63,10 @@ middlewareObj.validateRegisterInput = function validateRegisterInput(
   data,
   next
 ) {
-  //Convert empty fields to a string so validator functions will work
   data.username = !isEmpty(data.username) ? data.username : "";
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
 
-  //Check for empty email field
   if (validator.isEmpty(data.username)) {
     req.flash("error", "Username field is required!");
     res.redirect("/register");
